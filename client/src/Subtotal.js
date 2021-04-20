@@ -1,18 +1,38 @@
-import React from 'react';
+import React,
+{
+  useState,
+  useEffect,
+} from 'react';
 import CurrencyFormat from 'react-currency-format';
 import './Subtotal.css';
+import {
+  useStateValue,
+} from './StateProvider';
 
-const Subtotal = ({ basket }) => {
+const Subtotal = () => {
+  const [{ basket }, dispatch] = useStateValue();
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let tot = 0;
+    let i = 0;
+    if (basket.length > 0) {
+      for (i; i < basket.length; i++) {
+        tot += basket[i].price
+      }
+      setTotal(tot);
+    }
+  }, [basket])
+
   return (
     <div className="subtotal">
       <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
-              Subtotal (0 items):
+              Subtotal ({basket?.length} items):
               <strong>
-                0
-                {/* {`${value}`} */}
+                {value}
               </strong>
             </p>
             <small className="subtotal_gift">
@@ -21,7 +41,7 @@ const Subtotal = ({ basket }) => {
           </>
         )}
         decimalScale={2}
-        value={0}
+        value={total}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"$"}
