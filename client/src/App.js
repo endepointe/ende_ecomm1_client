@@ -7,7 +7,7 @@ import Checkout from './Checkout';
 import Header from './Header';
 import Home from './Home';
 import './App.css';
-// resume at 2:03 - context api
+// resume at 3:22 - authentication (will do with OAUTH)
 const App = () => {
   return (
     <Router>
