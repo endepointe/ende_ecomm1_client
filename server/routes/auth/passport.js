@@ -4,18 +4,16 @@ const passport = require('passport');
 
 router.get('/', (req, res) => {
   let db = req.app.get('psqldb');
+  let d;
   db.any('select * from users')
-    .then(data => {
-      console.log(`Data: ${data}`)
+    .then((data) => {
+      console.log(data);
+      res.json(data);
     })
     .catch(error => {
       console.error(error);
-    })
-    .finally(db.$pool.end);
-
-  res.json({
-    test: 'at the auth route'
-  });
+      res.json(error)
+    });
 });
 
 module.exports = router;

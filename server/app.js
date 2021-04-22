@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const cookieSession = require('cookie-session');
 const port = 3001;
 require('dotenv').config({ path: './dev.env' });
 const passport = require('passport');
@@ -14,7 +15,12 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 app.use(passport.initialize());
+app.use(passport.session());
 
 // routes
 app.use('/test', require('./routes/test/test'));
