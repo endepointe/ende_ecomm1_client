@@ -67,3 +67,16 @@
   margin-left: 10px;
   margin-right: 10px;  
 }
+
+.header_nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header_option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+}

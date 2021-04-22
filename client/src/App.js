@@ -6,6 +6,7 @@ import {
 import Checkout from './Checkout';
 import Header from './Header';
 import Home from './Home';
+import Login from './Login';
 import './App.css';
 // resume at 3:22 - authentication (will do with OAUTH)
 const App = () => {
@@ -16,6 +17,9 @@ const App = () => {
 
         {/* default route must be at the bottom */}
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
           <Route path="/checkout">
             <Checkout />
           </Route>

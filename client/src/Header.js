@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import {
   useStateValue,
 } from './StateProvider';
+//import { auth }
 
 const Header = () => {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
 
   return (
     <div className="header">
@@ -25,15 +26,17 @@ const Header = () => {
       </div>
 
       <div className="header_nav">
+        <Link to={!user && '/login'}>
 
-        <div className="header_option">
-          <span className="header_option_1">
-            Hello Guest
-          </span>
-          <span className="header_option_2">
-            Sign In
-          </span>
-        </div>
+          <div className="header_option">
+            <span className="header_option_1">
+              Hello {!user ? 'Guest' : user.email}
+            </span>
+            <span className="header_option_2">
+              {user ? 'Sign Out' : 'Sign In'}
+            </span>
+          </div>
+        </Link>
 
         <div className="header_option">
           <div className="header_option">
