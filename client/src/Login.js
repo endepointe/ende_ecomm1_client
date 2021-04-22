@@ -11,11 +11,15 @@ const Login = () => {
   const signIn = e => {
     e.preventDefault();
     // handle google oauth
+
   }
 
   const register = e => {
     e.preventDefault();
     // handle auth
+    fetch('http://localhost:3001/auth')
+      .then(res => res.json())
+      .then(data => console.log(data))
   }
 
   return (
@@ -53,7 +57,7 @@ const Login = () => {
 
         <button
           onClick={register}
-          className="login_registerButton">Create your Account</button>
+          className="login_google_registerButton">Sign-in with Google</button>
       </div>
     </div>
   );
