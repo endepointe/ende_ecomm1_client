@@ -1,3 +1,5 @@
+@import './global_colors.css';
+
 .login {
   background-color: white;
   height: 100vh;
@@ -47,20 +49,28 @@
 }
 
 .login_signInButton {
-  background: #f0c14b;
+  background: var(--ende-yellow);
   border-radius: 2px;
   width: 100%;
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
-  border-color: #a88734 #9c7e31 #846a29;
+  border-color: var(--ende-yellow) var(--ende-yellow) var(--ende-yellow) ;
 }
 
-.login_google_registerButton {
+.login_google_registerLink {
   border-radius: 2px;
   width: 100%;
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
   border-color: darkgray;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_google_registerLink > a {
+  text-decoration: none;
 }

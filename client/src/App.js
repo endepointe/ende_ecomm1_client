@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import Checkout from './Checkout';
-import Header from './Header';
+import Navbar from './Navbar';
 import Home from './Home';
 import Login from './Login';
 import './App.css';
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Navbar />
 
         {/* default route must be at the bottom */}
         <Switch>

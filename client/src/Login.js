@@ -8,26 +8,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signIn = e => {
-    e.preventDefault();
-    // handle google oauth
-
-  }
-
-  const register = e => {
-    e.preventDefault();
-    // handle auth
-    fetch('http://localhost:3001/auth')
-      .then(res => res.json())
-      .then(data => console.log(data))
-  }
-
   return (
     <div className="login">
       <Link to="/">
         <img
           className="login_logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png" alt="" />
+          src="https://via.placeholder.com/1024x800?text=Logo" alt="" />
       </Link>
 
       <div className="login_container">
@@ -47,17 +33,19 @@ const Login = () => {
 
           <button
             className="login_signInButton"
-            type="submit"
-            onClick={signIn}>Sign-in</button>
+            type="submit">Sign-in</button>
         </form>
 
         <p>
           By signing-in, you agree to the [Business Name] Conditions of Use & Sale. Please see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
         </p>
 
-        <button
-          onClick={register}
-          className="login_google_registerButton">Sign-in with Google</button>
+        <button className="login_google_registerLink">
+          <a href="http://localhost:3001/auth/google">
+            Sign-in with Google
+          </a>
+        </button>
+
       </div>
     </div>
   );
