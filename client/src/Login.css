@@ -74,3 +74,7 @@
 .login_google_registerLink > a {
   text-decoration: none;
 }
+
+.login_google_registerLink > a:visited {
+  text-decoration: none;
+}
