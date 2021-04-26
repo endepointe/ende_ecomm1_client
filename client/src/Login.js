@@ -8,6 +8,10 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const test = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div className="login">
       <Link to="/">
@@ -44,6 +48,9 @@ const Login = () => {
           <a href="http://localhost:3001/auth/google">
             Sign-in with Google
           </a>
+        </button>
+        <button onClick={test}>
+          test
         </button>
 
       </div>

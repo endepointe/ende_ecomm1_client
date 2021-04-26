@@ -5,19 +5,14 @@ const passport = require('passport');
 router.get('/google', googleAuth, passport.authenticate(
   'google',
   {
-    scope: ['https://www.googleapis.com/auth/plus.login']
+    scope: ['profile', 'email']
   }
 ));
 
-router.get('/google/callback', passport.authenticate(
-  'google',
-  {
-    failureRedirect: 'http://localhost:3000/login'
-  }
-),
-  function (req, res) {
-    res.redirect('/');
-  }
-);
+router.get('/google/callback', passport.authenticate('google', {
+  failureRedirect: '/login'
+}), (req, res) => {
+  res.redirect('http://localhost:3000/');
+});
 
 module.exports = router;

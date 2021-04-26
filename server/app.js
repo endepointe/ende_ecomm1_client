@@ -10,7 +10,7 @@ const psqldb = require('./db/psqldb');
 app.set('psqldb', psqldb);
 
 var corsOptions = {
-  origin: true
+  origin: 'http://localhost:3000'
 }
 
 // middleware
@@ -23,6 +23,7 @@ app.use(cookieSession({
 
 // routes
 app.use('/auth', require('./routes/auth'));
+app.use('/test', require('./routes/test'));
 
 app.listen(port, () => {
   console.log(`ecommerce server running on port ${port}`);

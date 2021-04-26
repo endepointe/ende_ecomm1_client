@@ -10,32 +10,29 @@ module.exports = function (req, res, next) {
     callbackURL: "http://localhost:3001/auth/google/callback"
   },
     function (accessToken, refreshtoken, profile, done) {
-      db.oneOrNone(`Select id 
+      console.log(profile);
+      db.oneOrNone(`SELECT id 
                     FROM google_users
-                    WHERE id = ${profile.id};`
+                    WHERE id = '${profile.id}';`
       ).then((response) => {
-        console.log('response: ', response)
+        console.log('check response: ', response);
+
         if (response === null) {
-          db.one(`INSERT INTO google_users(id,
-                                               fname
-                                               lname,
-                                               photo)
-                      VALUES($1,$2,$3,$4) RETURNING id`,
-            [
-              profile.id,
-              profile.name.givenName,
-              profile.name.familyName,
-              profile.photos[0].value
-            ])
+          db.none(`insert into google_users values (
+            '${profile.id}',
+            '${profile.name.givenNamee}',
+            '${profile.name.familyName}',
+            '${profile.photos[0].value}'
+          )`)
             .then((data) => {
-              //User = data;
-              console.log(data);
+              User = data;
               return done(User);
             })
             .catch(error => {
               console.error(error);
             })
         }
+
       }).catch((err) => {
         console.error(err);
       })
