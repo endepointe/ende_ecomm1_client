@@ -10,6 +10,8 @@ const Login = () => {
   const test = (e) => {
     e.preventDefault();
     console.log(email);
+    // todo will be to get the google oauth credentials from the 
+    ///  google authorization server
   }
 
   return (

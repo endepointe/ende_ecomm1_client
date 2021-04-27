@@ -1,11 +1,9 @@
-// import React from 'react';
-// import {
-//   useStateValue,
-// } from './StateProvider';
+import React from 'react';
+// import {useAppContext} from '../context/state';
 import styles from '../styles/Product.module.css';
 
 const Product = ({ id, title, image, price, rating }) => {
-  // const [{ basket }, dispatch] = useStateValue();
+  // const [dispatch] = useAppContext();
 
   // console.log(`basket: ${basket}`)
 
