@@ -2,8 +2,11 @@ import styles from '../styles/Navbar.module.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Link from 'next/link';
+import { useStateValue } from '../context/StateProvider';
 
 const Navbar = () => {
+  const [{ basket }, dispatch] = useStateValue();
+
   return (
     <div className={styles.navbar}>
       <Link href="/">
@@ -57,7 +60,7 @@ const Navbar = () => {
         <div className={styles.navbar_optionBasket}>
           <ShoppingBasketIcon />
           <span className={styles.navbar_option_2, styles.navbar_basketCount}>
-            0
+            {basket?.length}
           </span>
         </div>
       </Link>

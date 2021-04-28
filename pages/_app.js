@@ -1,11 +1,15 @@
 import '../styles/globals.css'
-import { CounterProvider } from '../context/Counter';
+import reducer,
+{
+  initialState
+} from '../context/reducer';
+import { StateProvider } from '../context/StateProvider';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <CounterProvider>
+    <StateProvider initialState={initialState} reducer={reducer}>
       <Component {...pageProps} />
-    </CounterProvider>
+    </StateProvider>
   )
 }
 
