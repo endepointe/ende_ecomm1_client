@@ -7,6 +7,12 @@ import { useStateValue } from '../context/StateProvider';
 const Navbar = () => {
   const [{ basket }, dispatch] = useStateValue();
 
+  const toggleNavMenu = () => {
+    console.log(document.getElementById('navbar_nav_links').classList);
+    document.getElementById('navbar_nav_links').classList.toggle(styles.show_nav_links);
+    console.log('open menu')
+  }
+
   return (
     <div className={styles.navbar}>
       <Link href="/">
@@ -23,48 +29,63 @@ const Navbar = () => {
       </div>
 
       <div className={styles.navbar_nav}>
-        <Link href='/login'>
-          <div className={styles.navbar_option}>
-            <span className={styles.navbar_option_1}>
-              Hello Guest
-            </span>
-            <span className={styles.navbar_option_2}>
-              Sign-in
-            </span>
-          </div>
-        </Link>
 
-        <div className={styles.navbar_option}>
-          <div className={styles.navbar_option}>
-            <span className={styles.navbar_option_1}>
-              Returns
-          </span>
-            <span className={styles.navbar_option_2}>
-              & Orders
-          </span>
-          </div>
-        </div>
+        <button
+          onClick={toggleNavMenu}
+          className={styles.navbar_nav_menuBtn}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </button>
 
-        <div className={styles.navbar_option}>
-          <div className={styles.navbar_option}>
-            <span className={styles.navbar_option_1}>
-              Your
+        {/* initiall hidden on small screens */}
+        <div
+          id="navbar_nav_links"
+          className={styles.navbar_nav_links}>
+          <Link href='/login'>
+            <div className={styles.navbar_option}>
+              <span className={styles.navbar_option_1}>
+                Hello Guest
+            </span>
+              <span className={styles.navbar_option_2}>
+                Sign-in
+            </span>
+            </div>
+          </Link>
+
+          <Link href="/orders">
+            <div className={styles.navbar_option}>
+              <span className={styles.navbar_option_1}>
+                Returns &
+            </span>
+              <span className={styles.navbar_option_2}>
+                Orders
+            </span>
+            </div>
+          </Link>
+
+          <Link href="/account">
+            <div className={styles.navbar_option}>
+              <span className={styles.navbar_option_1}>
+                Your
           </span>
-            <span className={styles.navbar_option_2}>
-              Account
+              <span className={styles.navbar_option_2}>
+                Account
           </span>
-          </div>
+            </div>
+          </Link>
+
+          <Link href="/checkout">
+            <div className={styles.navbar_optionBasket}>
+              <ShoppingBasketIcon />
+              <span className={styles.navbar_option_2, styles.navbar_basketCount}>
+                {basket?.length}
+              </span>
+            </div>
+          </Link>
         </div>
+        {/* end of hidden link content on small screens */}
       </div>
-      <Link href="/checkout">
-        <div className={styles.navbar_optionBasket}>
-          <ShoppingBasketIcon />
-          <span className={styles.navbar_option_2, styles.navbar_basketCount}>
-            {basket?.length}
-          </span>
-        </div>
-      </Link>
-
     </div>
   )
 }
