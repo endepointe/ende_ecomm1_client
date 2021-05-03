@@ -1,9 +1,9 @@
 .home {
   display: flex;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1500px;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 100%;
 }
 
 .home_container {
@@ -20,6 +20,6 @@
 .home_row {
   display: flex;
   z-index: 1;
-  margin-left: 5px;
-  margin-right: 5px;
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
 }

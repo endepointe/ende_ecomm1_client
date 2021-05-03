@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Layout.module.css';
-import Header from './Header';
+import Navbar from './Navbar';
 
 const Layout = (props) => {
   return (
@@ -9,7 +9,7 @@ const Layout = (props) => {
         <title>Ende Ecomm 1</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Navbar />
       <main>
         <div className={styles.container}>{props.children}</div>
       </main>

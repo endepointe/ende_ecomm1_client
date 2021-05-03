@@ -3,9 +3,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Link from 'next/link';
 import { useStateValue } from '../context/StateProvider';
+import { useUser } from '../lib/hooks';
 
 const Navbar = () => {
   const [{ basket }, dispatch] = useStateValue();
+  const user = useUser();
 
   const toggleNavMenu = () => {
     console.log(document.getElementById('navbar_nav_links').classList);

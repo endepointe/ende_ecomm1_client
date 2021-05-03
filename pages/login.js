@@ -24,7 +24,7 @@ const Login = () => {
     if (errorMsg) setErrorMsg('');
     if (password !== verifyPassword) {
       setErrorMsg('Passwords do not match');
-      return
+      return;
     }
     let body = {
       username: email,
@@ -32,21 +32,19 @@ const Login = () => {
       verifyPassword: verifyPassword,
     };
     try {
-      console.log(body)
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       if (res.status === 200) {
-        console.log(res);
         Router.push('/');
       }
       if (res.status !== 200) {
         throw new Error(await res.text());
       }
     } catch (error) {
-      console.error('Error: ', error);
+      console.error(error);
       setErrorMsg(error.message);
     }
   }
