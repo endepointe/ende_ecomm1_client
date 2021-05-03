@@ -1,22 +1,87 @@
+import Layout from '../components/Layout';
 import styles from '../styles/Login.module.css';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
+import { useUser } from '../lib/hooks';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [register, setRegister] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
+  useUser({ redirectTo: '/', redirectIfFound: true });
 
-  const test = (e) => {
+  const toggleRegister = (e) => {
     e.preventDefault();
-    console.log(email);
-    // todo will be to get the google oauth credentials from the 
-    ///  google authorization server
+    setRegister(!register);
+  }
+
+  async function handleRegister(e) {
+    e.preventDefault()
+    console.log('registering user')
+    if (errorMsg) setErrorMsg('');
+    if (password !== verifyPassword) {
+      setErrorMsg('Passwords do not match');
+      return
+    }
+    let body = {
+      username: email,
+      password: password,
+      verifyPassword: verifyPassword,
+    };
+    try {
+      console.log(body)
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 200) {
+        console.log(res);
+        Router.push('/');
+      }
+      if (res.status !== 200) {
+        throw new Error(await res.text());
+      }
+    } catch (error) {
+      console.error('Error: ', error);
+      setErrorMsg(error.message);
+    }
+  }
+
+  async function handleLogin(e) {
+    console.log('logging in')
+    e.preventDefault();
+    if (errorMsg) setErrorMsg('');
+
+    let body = {
+      username: email,
+      password: password,
+      verifyPassword: verifyPassword,
+    };
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 200) {
+        Router.push('/');
+      }
+      if (res.status !== 200) {
+        throw new Error(await res.text());
+      }
+    } catch (error) {
+      console.error('Error: ', error);
+      setErrorMsg(error.message);
+    }
   }
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className={styles.login}>
         <Link href="/">
           <img
@@ -38,11 +103,37 @@ const Login = () => {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)} />
+            {!register ?
+              <>
+                <h5>Verify Password</h5>
+                <input
+                  type="password"
+                  value={verifyPassword}
+                  onChange={e => setVerifyPassword(e.target.value)} /></> : null}
 
-            <button
-              className={styles.login_signInButton}
-              onClick={test}
-              type="submit">Sign-in</button>
+            {register ?
+              <button
+                onClick={handleLogin}
+                className={styles.login_signInButton}
+                type="submit">Sign-in</button> : <button
+                  onClick={handleRegister}
+                  className={styles.login_signInButton}
+                  type="submit">Register</button>}
+
+            {register ?
+              <button
+                className={styles.login_registerButton}
+                onClick={toggleRegister}>
+                Need an account?
+            </button>
+              :
+              <button
+                className={styles.login_registerButton}
+                onClick={toggleRegister}>
+                Have an account?
+            </button>
+            }
+
           </form>
 
           <p>
@@ -54,13 +145,10 @@ const Login = () => {
               Sign-in with Google
           </a>
           </button>
-          <button onClick={test}>
-            test
-        </button>
 
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

@@ -1,7 +1,7 @@
 import styles from '../styles/Checkout.module.css';
 import Subtotal from '../components/Subtotal';
 import CheckoutProduct from '../components/CheckoutProduct';
-import Navbar from '../components/Navbar';
+import Layout from '../components/Layout';
 import {
   useStateValue,
 } from '../context/StateProvider';
@@ -9,8 +9,7 @@ import {
 const Checkout = () => {
   const [{ basket }, dispatch] = useStateValue();
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className={styles.checkout}>
         <div className={styles.checkout_left}>
           <img
@@ -38,7 +37,7 @@ const Checkout = () => {
           <Subtotal />
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
