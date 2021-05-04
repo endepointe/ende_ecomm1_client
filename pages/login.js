@@ -4,12 +4,14 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useUser } from '../lib/hooks';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
   const [register, setRegister] = useState(true);
+  const [session, loading] = useSession();
   const [errorMsg, setErrorMsg] = useState('');
   useUser({ redirectTo: '/', redirectIfFound: true });
 
@@ -138,12 +140,19 @@ const Login = () => {
             By signing-in, you agree to the [Business Name] Conditions of Use & Sale. Please see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
           </p>
 
-          <button className={styles.login_google_registerLink}>
-            <a href="http://localhost:3001/auth/google">
-              Sign-in with Google
-          </a>
+          <button
+            className={styles.login_google_registerLink}>
+            Sign-in with Google
           </button>
 
+          {!session && <>
+            Not signedin <br />
+            <button onClick={() => signIn(null, { callbackUrl: 'http://localhost:3000/' })}>Sign in</button>
+          </>}
+          {session && <>
+            Signedinas {session.user.email} <br />
+            <button onClick={() => signOut()}>Sign out</button>
+          </>}
         </div>
       </div>
     </Layout>
