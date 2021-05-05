@@ -1,7 +1,7 @@
 import passport from 'passport';
 import nextConnect from 'next-connect';
 // import { localStrategy } from '../../lib/password-local';
-import { googleStrategy } from '../../passport-google';
+import { googleStrategy } from '../../lib/passport-google';
 import { setLoginSession } from '../../lib/auth';
 
 const authenticate = (method, req, res) => {
@@ -18,7 +18,7 @@ const authenticate = (method, req, res) => {
 }
 
 // passport.use(localStrategy);
-passport.user(googleStrategy);
+passport.use(googleStrategy);
 
 export default nextConnect()
   .use(passport.initialize())

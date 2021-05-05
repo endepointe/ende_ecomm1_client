@@ -8,7 +8,7 @@ const Home = () => {
         <div className={styles.home_header}>
           <img
             className={styles.home_image}
-            src="../static/images/business-card.jpg" alt="business card" />
+            src="business-card.jpg" alt="business card" />
           <button className={styles.home_shopNowButton}>
             Shop now
           </button>

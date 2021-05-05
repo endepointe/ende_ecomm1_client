@@ -90,6 +90,9 @@
   font-size: 16px;
 }
 
-.login_google_registerLink > a:visited {
+.login_google_registerLink:visited {
   text-decoration: none;
+}
+.login_google_registerLink:hover {
+  cursor: pointer;
 }
